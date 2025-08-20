@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package planning;
+option go_package = "../pbs";
+
+service PlanningService {
+  rpc IsAvailable (AvailabilityInquiryRequest) returns (AvailabilityInquiryResponse);
+  rpc GetShortages (GetShortagesInquiryRequest) returns (GetShortagesInquiryResponse);
+}
+
+message AvailabilityInquiryRequest {
+  int64 equipment = 1;
+  int64 quantity = 2;
+  string start_at = 3;
+  string end_at = 4;
+}
+
+message AvailabilityInquiryResponse {
+  bool IsAvailable = 1;
+}
+
+message GetShortagesInquiryRequest {
+  string start_at = 1;
+  string end_at = 2;
+}
+
+message GetShortagesInquiryResponse {
+  map<int64, int64> shortages = 1;
+}

@@ -1,0 +1,14 @@
+{
+  "service": "main",
+  "logLevel": "trace",
+  "grpcServerAddress": "0.0.0.0:50051",
+  "postgres": {
+    "host": "postgres",
+    "port": "5432",
+    "user": "postgres",
+    "password": "123456789",
+    "db": "assessment",
+    "sslMode": "disable",
+    "timezone": "UTC"
+  }
+}

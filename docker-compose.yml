@@ -1,0 +1,36 @@
+services:
+
+  app:
+    container_name: assessment
+    build: .
+    volumes:
+      - /home/storage:/storage
+    networks:
+      - postgres
+    ports:
+      - 50051:50051
+    depends_on:
+      - db
+    restart: unless-stopped
+    env_file:
+      - .env
+
+  db:
+    image: postgres:15.2
+    container_name: assessment_db
+    hostname: postgres
+    volumes:
+      - pgassessment:/var/lib/postgresql/data
+    networks:
+      - postgres
+    restart: unless-stopped
+    env_file:
+      - .env
+    ports:
+      - 5433:5432
+
+volumes:
+  pgassessment:
+
+networks:
+  postgres:
