@@ -5,8 +5,11 @@ import (
 	"assessment/pkg"
 	"assessment/presentation/grpc/pbs"
 	"assessment/presentation/grpc/servers"
+
 	"github.com/sirupsen/logrus"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
+
 	"net"
 )
 
@@ -23,6 +26,7 @@ func Start() {
 	grpcServer = grpc.NewServer()
 	/* register GRPC servers */
 	pbs.RegisterPlanningServiceServer(grpcServer, servers.NewPlanningServer(di.PlanningService()))
+	reflection.Register(grpcServer)
 
 	logrus.WithFields(logrus.Fields{
 		"grpc_started_at": pkg.Config.GrpcServerAddress,
